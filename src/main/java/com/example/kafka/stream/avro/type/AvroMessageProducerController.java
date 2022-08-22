@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.kafka.stream.avro.model.UserSink;
+import com.example.kafka.stream.avro.model.UserSinkSource;
 import com.example.kafka.stream.avro.model.UserSource;
 import com.example.kafka.stream.json.model.ExampleSourceOne;
 import com.example.kafka.stream.json.model.SourceTwo;
@@ -32,6 +34,14 @@ public class AvroMessageProducerController {
     public void simple(@RequestParam String name, @RequestParam int age) {
         UserSource userSource = UserSource.newBuilder().setNameSource(name).setAgeSource(age).build();
         avroKafkaProducer.produceUserSource(userSource);
+    }
+
+    @GetMapping("/sink")
+    public void sink(@RequestParam String name, @RequestParam int age,
+                     @RequestParam(defaultValue = AvroStreamConstant.MessageType.SOURCE_1) String type) {
+        UserSinkSource userSinkSouce = UserSinkSource.newBuilder()
+            .setNameSinkSource(name).setAgeSink(age).setPlusSinkSource(type).build();
+        avroKafkaProducer.produceUserSink(userSinkSouce);
     }
 
 }

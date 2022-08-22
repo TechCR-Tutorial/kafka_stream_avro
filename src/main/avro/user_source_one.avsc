@@ -1,0 +1,16 @@
+{
+  "namespace": "com.example.kafka.stream.avro.model",
+  "type": "record",
+  "name": "UserSourceOne",
+  "fields": [
+    {
+      "name": "nameSourceOne",
+      "type": "string",
+      "avro.java.string": "String"
+    },
+    {
+      "name": "ageSourceOne",
+      "type": "int"
+    }
+  ]
+}
