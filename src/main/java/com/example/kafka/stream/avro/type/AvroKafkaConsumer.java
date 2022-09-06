@@ -30,7 +30,8 @@ public class AvroKafkaConsumer {
     }
     @KafkaListener(topics = AvroStreamConstant.Topic.USER_SINK_SOURCE, groupId = SIMPLE_AVRO_CONSUMER_ID)
     public void consumeUserSinkSource(ConsumerRecord<String, UserSinkSource> sinkRecord) {
-        log.info(String.format("Consumed User Sink Record -> %s : %s", sinkRecord.key(), sinkRecord.value()));
+        UserSinkSource resultSinkSource = sinkRecord.value();
+        log.info(String.format("Consumed User Sink Record -> %s : %s", sinkRecord.key(), resultSinkSource));
     }
 
     @KafkaListener(topics = AvroStreamConstant.Topic.USER_SOURCE, groupId = SIMPLE_AVRO_CONSUMER_ID)

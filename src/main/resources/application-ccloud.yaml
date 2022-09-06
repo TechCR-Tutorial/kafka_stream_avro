@@ -10,17 +10,23 @@ spring:
     bootstrap-servers:
       - {server_url}
     properties:
+      # CCloud broker connection parameters
+      bootstrap:
+        servers: {server_url}
       ssl.endpoint.identification.algorithm: https
       sasl.mechanism: PLAIN
-      request.timeout.ms: 20000
+      request.timeout.ms: 45000
       retry.backoff.ms: 500
       sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule   required username='{user_name}'   password='{password}';
       security.protocol: SASL_SSL
 
       # CCloud Schema Registry Connection parameter
       schema.registry.url: {scema_registry_url}
-      basic.auth.credentials.source: USER_INFO  # <4>
-      schema.registry.basic.auth.user.info: {registry_user_auth_info}
+      basic:
+        auth:
+          user.info: {registry_user_auth_info}
+          credentials.source: USER_INFO
+      specific.avro.reader: true
     consumer:
       group-id: group_id
       auto-offset-reset: earliest

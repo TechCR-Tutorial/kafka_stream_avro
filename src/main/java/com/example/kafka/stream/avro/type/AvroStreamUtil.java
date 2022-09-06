@@ -14,9 +14,12 @@ public class AvroStreamUtil {
 
     @Value(value = "${spring.kafka.bootstrap-server}")
     private String bootstrapAddress;
-
     @Value(value = "${spring.kafka.properties.schema.registry.url}")
     private String schemaRegistry;
+    @Value(value = "${spring.kafka.properties.sasl.jaas.config}")
+    private String saslJaasConfig;
+    @Value(value = "${spring.kafka.properties.schema.registry.basic.auth.user.info}")
+    private String basicUserInfo;
 
     public Properties getDefaultProps(String applicationId) {
         final Properties config = new Properties();
@@ -27,11 +30,11 @@ public class AvroStreamUtil {
         config.put("sasl.mechanism", "PLAIN");
         config.put("request.timeout.ms", 20000);
         config.put("retry.backoff.ms", 500);
-        config.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username='SYNBWX6GH6LM5PL6' password='BmiTW8ZJbdfpqe1NeiJFA0+0xz0JbXtbeniM+eHYigxKArRP6cRDE6z+pKcIgyM9';");
+        config.put("sasl.jaas.config", saslJaasConfig);
         config.put("security.protocol", "SASL_SSL");
         config.put("schema.registry.url", schemaRegistry);
         config.put("basic.auth.credentials.source", "USER_INFO");
-        config.put("schema.registry.basic.auth.user.info", "65F6YLYZBQFSV5CJ:X9rIo/bRfPM+lkGuQLWLTDsdApyj6PLknqDNvdlmR606aAa7nmIvxCJcCUnDZ3HL");
+        config.put("schema.registry.basic.auth.user.info", basicUserInfo);
 
         return config;
 

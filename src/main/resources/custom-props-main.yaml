@@ -1,0 +1,11 @@
+custom:
+  props:
+    main:
+      global:
+        xx_1: xx1
+        xx_2: xx2
+        xx_3: xx3
+      france:
+        xx_1: xxf1
+      uk:
+        xx_2: xxu2

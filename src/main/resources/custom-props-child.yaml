@@ -1,0 +1,11 @@
+custom:
+  props:
+    child:
+      global:
+        name_2: name
+        age_2: age
+        global_2: global
+      france:
+        name_2: nameFrance
+      uk:
+        age_2: ageUK
